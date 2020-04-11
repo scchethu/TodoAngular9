@@ -28,11 +28,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 #To setup api server
-####`cd TodoServer`
-####create database `todo`
-####edit .env `DB_DATABASE=todo` 
+#### `cd TodoServer`
+#### create database `todo`
+#### edit .env `DB_DATABASE=todo` 
 
-####run cmd `php artisan migrate`
-####run cmd `php artisan serve`
+#### run cmd `php artisan migrate`
+#### run cmd `php artisan serve`
 
 
