@@ -4,15 +4,13 @@ import {Router} from "@angular/router";
 import {Todo} from "../todo";
 import {TodoServiceService} from "../todo-service.service";
 import {ToastrService} from "ngx-toastr";
-import {IError} from "../i-error";
-import {InterceptorService} from "../interceptor.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, IError {
+export class HomeComponent implements OnInit{
   private todo: FormControl;
   f: FormGroup;
   public todolist = new Array<Todo>();
@@ -23,9 +21,7 @@ export class HomeComponent implements OnInit, IError {
     private toastr: ToastrService) {
    // this.todolist.push('hello');
   }
-  showError(msg: string) {
-    this.toastr.error(msg);
-  }
+
   ngOnInit(): void {
     this.f = this.formBuilder.group(
       {
@@ -53,7 +49,7 @@ deleteTodo(i: number){
   this.todoservice.deleteTodo(this.todolist[i].id).subscribe((data: any) => {
     console.log(data);
     this.todolist = data;
-    this.toastr.success('Hello world!', 'Toastr fun!');
+    this.toastr.success('Deleted user', 'info');
   });
 }
 toggleCheck(i: number){
