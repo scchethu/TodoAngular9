@@ -5,17 +5,17 @@
         <div class="card px-3">
           <div class="card-body">
             <h4 class="card-title">Awesome Todo list</h4>
-            <div class="add-items d-flex">
+
               <form [formGroup]="f" action="" (ngSubmit)="addTodo()">
                <div class="form-group">
-                 <input formControlName="todo" type="text" class="form-control " placeholder="What do you need to do today?">
+                 <input formControlName="todo" type="text" class="form-control" placeholder="What do you need to do today?">
                </div> <button type="submit" class="add btn btn-primary font-weight-bold todo-list-add-btn">Add</button>
               </form>
-            </div>
+
             <div class="list-wrapper">
               <ul class="d-flex flex-column-reverse todo-list" >
                   <li  *ngFor="let _todolist of todolist;let i=index" [ngClass]="{'completed':_todolist.isChecked}">
-                    <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox" (click)="toggleCheck(i)" [checked]="_todolist.isChecked"> {{_todolist.task}}<i class="input-helper"></i> {{_todolist.date}}</label> </div> <i class="remove mdi mdi-close-circle-outline" (click)="deleteTodo(i)"></i>
+                    <div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox" (click)="toggleCheck(i)" [checked]="_todolist.isChecked"> {{_todolist.task}}<i class="input-helper"></i><div style="font-style: italic;font-size: 10px"> {{_todolist.date}}</div> </label> </div> <i class="remove mdi mdi-close-circle-outline" (click)="deleteTodo(i)"></i>
                   </li>
 
 
