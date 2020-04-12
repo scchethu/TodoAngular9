@@ -6,14 +6,21 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor{
-  constructor(public toastr: ToastrService) { }
+  constructor(public toastr: ToastrService
+  ,           private router: Router
+  ) { }
   handleError(error: HttpErrorResponse){
-  alert(error.message);
-  return throwError(error);
+
+    // tslint:disable-next-line:triple-equals
+    if (error.status.toString() !== '401') {
+      alert(error.message);
+    }
+    return throwError(error);
   }
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>>{

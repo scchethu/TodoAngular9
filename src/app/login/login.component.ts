@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
+import {TodoServiceService} from "../todo-service.service";
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,14 @@ export class LoginComponent implements OnInit {
 f: FormGroup;
   constructor(   private formBuilder: FormBuilder,
                  private router: Router,
+                 private todoservice: TodoServiceService
                  ) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('token') != null)
+    {
+      this.router.navigateByUrl('home');
+    }
     this.f = this.formBuilder.group(
       {
         username: ['', Validators.required],
@@ -25,7 +31,11 @@ f: FormGroup;
   submit(): void {
     if (!this.f.invalid ) {
      // alert(this.fa.username.value);
-this.router.navigateByUrl('home');
+      this.todoservice.auth(this.fa.username.value, this.fa.password.value).subscribe((data: any) => {
+        localStorage.setItem('token', data.success.token);
+        this.router.navigateByUrl('home');
+      });
+
     }
   }
 }

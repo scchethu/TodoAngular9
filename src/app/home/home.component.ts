@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Todo} from "../todo";
 import {TodoServiceService} from "../todo-service.service";
 import {ToastrService} from "ngx-toastr";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-home',
@@ -31,8 +32,9 @@ export class HomeComponent implements OnInit{
     this.todoservice.getTodo().subscribe((data: any) => {
      // alert(data);
       this.todolist = data;
+    }, ( error: HttpErrorResponse) => {
+      this.toastr.error(error.message);
     });
-
   }
   get fa(){return this.f.controls; }
 addTodo()
@@ -42,8 +44,10 @@ addTodo()
  this.todoservice.CreateTodo(t).subscribe((data: any) => {
    console.log(data);
    this.todolist = data;
-  });
- this.fa.todo.setValue('');
+   this.fa.todo.setValue('');
+  }, ( error: HttpErrorResponse) => {
+  this.toastr.error(error.message);
+});
 }
 deleteTodo(i: number){
   this.todoservice.deleteTodo(this.todolist[i].id).subscribe((data: any) => {

@@ -8,4 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent {
   title = 'UserBlockCrud';
+
+  logout() {
+    localStorage.removeItem('token');
+  }
 }
